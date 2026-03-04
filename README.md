@@ -1,31 +1,45 @@
 # E-Commerce Playwright Automation Framework
 
-A robust, abstract, Data-Driven E2E testing framework built with **Python**, **Playwright**, and **Pytest**.  
+A robust, Data-Driven E2E testing framework built with **Python**, **Playwright**, and **Pytest**.  
 Designed to run resiliently across diverse e-commerce sites (e.g. eBay) using a clean POM architecture with smart locator fallback.
 
 ---
 
 ## Architecture
 
-### 1. Abstract Page Object Model (POM)
-All page logic lives in abstract page classes (`abstract_home_page.py`, `abstract_search_results_page.py`, `abstract_item_page.py`, `abstract_cart_page.py`, `abstract_login_page.py`).  
-**No locators are hardcoded** in Python — they are injected at runtime from site-specific JSON files.
+### 1. Page Object Model (POM)
+All page logic lives in stateless page classes (`home_page.py`, `search_results_page.py`, `item_page.py`, `cart_page.py`, `login_page.py`).  
+**No locators are hardcoded** in Python — they are loaded from site-specific JSON files via `data/data_loader.py` and eagerly extracted into named attributes in each page's `__init__`.
 
 ### 2. Smart Locators & Resilience
 `BasePage` (`core/base_page.py`) implements fallback-driven interaction methods:
-- `smart_click(locators[])` — tries each locator in order; logs which succeeded/failed
-- `smart_fill(locators[])` — same for inputs
-- `smart_get_text(locators[])` — same for reading text
+- `smart_click(selectors[])` — tries each selector in order; logs which succeeded/failed
+- `smart_fill(selectors[])` — same for inputs
+- `smart_get_text(selectors[])` — same for reading text
+- `smart_get_number(selectors[])` — extracts a float via JS `parseFloat`, no regex needed
 
-Each element defines **alternative locators** in the JSON. If the primary fails (A/B test, DOM change), the next is tried automatically. Failed attempts are logged with the locator name and attempt number. A screenshot is captured on final failure.
+Each element defines **alternative selectors** in the JSON. If the primary fails (A/B test, DOM change), the next is tried automatically. A screenshot is captured on final failure.
 
 ### 3. Data-Driven Configuration
 - **Test inputs**: `data/test_data.json` — site, query, maxPrice, limit
 - **Locators**: `data/locators/{site}_locators.json` — fully external, per-site
+- **Locator keys**: `data/locator_keys.py` — `str`-inheriting Enums per page section
+- **Shared constants**: `core/constants.py` — Playwright states/load strategies, HTML attrs, timeouts (all as Enums or named constants — no hardcoded strings anywhere)
 - Adding a new site requires only a new locators JSON — no Python changes
 
-### 4. Remote Grid / Moon Support
-The `conftest.py` browser fixture checks `GRID_URL` in `.env`.  
+### 4. Fixtures (conftest.py)
+Fixtures form a dependency chain:
+```
+playwright (built-in)
+    └── browser     (session scope — one Chromium instance per run)
+            └── context  (function scope — fresh cookies + tracing per test)
+                    └── page      (function scope — one tab per test)
+                            └── site_pages  (function scope — all 5 page objects)
+```
+`site_pages` returns an `EcommerceSitePages` dataclass, so tests access pages via `site_pages.home`, `site_pages.cart`, etc.
+
+### 5. Remote Grid / Moon Support
+The `browser` fixture checks `GRID_URL` in `.env`.  
 When set, it connects via WebSocket (`playwright.chromium.connect(ws_endpoint=...)`), enabling execution on Selenium Grid / Moon with full session isolation per test.
 
 ---
@@ -34,10 +48,10 @@ When set, it connects via WebSocket (`playwright.chromium.connect(ws_endpoint=..
 
 | Function | Location | Description |
 |---|---|---|
-| `login(email, password)` | `AbstractLoginPage` | Fills credentials and submits. Skipped gracefully when no creds provided (Guest mode). |
-| `searchItemsByNameUnderPrice(query, maxPrice, limit)` | `AbstractSearchResultsPage` | Applies price filter, collects up to `limit` item URLs, paginates if needed. |
-| `addItemsToCart(urls)` | `AbstractItemPage` | Navigates each URL, selects random variants (listbox/select/button), clicks Add to Cart, takes screenshot. |
-| `assertCartTotalNotExceeds(budgetPerItem, itemsCount)` | `AbstractCartPage` | Reads cart subtotal, asserts total ≤ budgetPerItem × itemsCount. Saves screenshot + trace. |
+| `login(email, password)` | `LoginPage` | Fills credentials and submits. Skipped gracefully when no creds provided (Guest mode). |
+| `search_items_by_name_under_price(query, maxPrice, limit)` | `SearchResultsPage` | Applies price filter, collects up to `limit` item URLs, paginates if needed. |
+| `add_items_to_cart(urls)` | `ItemPage` | Navigates each URL, selects random variants (custom listbox / native select / button), clicks Add to Cart, takes screenshot. |
+| `get_cart_total()` | `CartPage` | Navigates to cart, reads subtotal as float via JS evaluation. Assertion (`total ≤ budget`) lives in the test. |
 
 ---
 
@@ -90,8 +104,12 @@ Credentials and `GRID_URL` are stored as **GitHub Secrets** (Settings → Secret
 ## Running Tests
 
 ```bash
-# Run all tests — allure results are generated automatically via pytest.ini
+# Run all tests with default test data (data/test_data.json)
 pytest tests
+
+# Run with a custom test data file (must be in the data/ directory)
+pytest tests --test-data=smoke_tests.json
+pytest tests --test-data=load_tests.json
 
 # Open the Allure report
 allure serve allure-results
@@ -107,7 +125,7 @@ allure serve allure-results
 |---|---|
 | **Authentication** | Login is **optional**. If `USER_EMAIL` / `USER_PASSWORD` are empty in `.env`, the test runs as a Guest (no login step). This is intentional to support environments without valid credentials and to handle eBay's anti-bot flows. |
 | **Currency** | Currency symbol validation is **not enforced**. The framework extracts the first numeric value from the cart subtotal text and compares it against the budget threshold. This avoids locale/currency failures (eBay may display currency differently by region). |
-| **Variants** | Variants (size, colour, etc.) are selected **randomly** from available options. Items with no variants are handled gracefully and proceed directly to Add to Cart. |
+| **Variants** | Variants (size, colour, etc.) are selected **randomly** from available options. Three strategies are tried in order: custom ARIA listbox → native `<select>` → button group. Items with no variants proceed directly to Add to Cart. |
 | **Pagination** | If fewer than `limit` items are found on the first results page, the framework automatically paginates until `limit` is reached or no more pages exist. |
 | **Parallelism** | Parallel browser execution is supported via Selenium Grid / Moon through `GRID_URL` in `.env`. Locally, tests run sequentially unless `pytest-xdist` is added. |
 
@@ -117,22 +135,25 @@ allure serve allure-results
 
 ```
 ├── config/
-│   └── settings.py              # Loads .env, logger, constants
+│   └── settings.py              # Loads .env, logger, env variables
 ├── core/
-│   └── base_page.py             # Smart locator methods, screenshots, go_to
+│   ├── base_page.py             # Smart locator methods, screenshots, go_to
+│   └── constants.py             # Playwright states, load strategies, HTML attrs (Enums + constants)
 ├── pages/
-│   ├── abstract_home_page.py
-│   ├── abstract_login_page.py
-│   ├── abstract_search_results_page.py
-│   ├── abstract_item_page.py
-│   └── abstract_cart_page.py
+│   ├── home_page.py
+│   ├── login_page.py
+│   ├── search_results_page.py
+│   ├── item_page.py
+│   └── cart_page.py
 ├── data/
+│   ├── locator_keys.py          # str-Enum key classes per page section
+│   ├── data_loader.py           # load_locators() (lru_cache) + load_test_params()
 │   ├── test_data.json           # Data-driven test inputs
 │   └── locators/
 │       └── ebay_locators.json   # Per-site locator definitions
 ├── tests/
 │   └── test_ecommerce.py        # Parametrized E2E test
-├── conftest.py                  # Browser / context fixtures, Grid support
+├── conftest.py                  # browser/context/page/site_pages fixtures
 ├── pytest.ini                   # Allure, markers configuration
 └── .env                         # Credentials & Grid URL (not committed)
 ```

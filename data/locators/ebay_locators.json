@@ -21,8 +21,8 @@
             "input.x-textrange__input--max"
         ],
         "price_filter_submit": [
-            ".x-textrange__button button",
             ".x-textrange__button",
+            ".x-textrange__button button",
             "button[aria-label='Submit price range']"
         ],
         "item_links": [
@@ -35,8 +35,10 @@
         ]
     },
     "item": {
-        "variant_dropdowns": [
-            "[data-testid='x-msku-evo'] .listbox-button__control",
+        "variant_custom_listboxes": [
+            "[data-testid='x-msku-evo'] .listbox-button__control"
+        ],
+        "variant_native_selects": [
             "[data-testid='x-msku-evo'] select.listbox__native"
         ],
         "variant_options": [

@@ -1,7 +1,12 @@
-import time
 from playwright.sync_api import Page, TimeoutError as PlaywrightTimeoutError
 from config.settings import logger
+from core.constants import (
+    DEFAULT_TIMEOUT_MS,
+    ElementState,
+    LoadState,
+)
 import allure
+
 
 class BasePage:
     def __init__(self, page: Page):
@@ -11,7 +16,8 @@ class BasePage:
         with allure.step(f"Navigate to {url}"):
             self.page.goto(url)
 
-    def _execute_with_smart_locators(self, action_name: str, locators: list[str], action_func, timeout_ms: int = 5000):
+    def _execute_with_smart_locators(self, locators: list[str], action_func, timeout_ms: int = DEFAULT_TIMEOUT_MS):
+        action_name = action_func.__name__
         last_exception = None
         for attempt_index, selector in enumerate(locators):
             try:
@@ -34,30 +40,39 @@ class BasePage:
         allure.attach(failure_screenshot, name=f"failed_{action_name}", attachment_type=allure.attachment_type.PNG)
         raise Exception(failure_message)
 
-    def smart_click(self, locators: list[str], timeout_ms: int = 5000):
+    def smart_click(self, locators: list[str], timeout_ms: int = DEFAULT_TIMEOUT_MS):
         def _click(element, timeout):
             element.click(timeout=timeout)
-        self._execute_with_smart_locators("click", locators, _click, timeout_ms)
+        self._execute_with_smart_locators(locators, _click, timeout_ms)
 
-    def smart_fill(self, locators: list[str], text: str, timeout_ms: int = 5000):
+    def smart_fill(self, locators: list[str], text: str, timeout_ms: int = DEFAULT_TIMEOUT_MS):
         def _fill(element, timeout):
             element.fill(text, timeout=timeout)
-        self._execute_with_smart_locators(f"fill ('{text}')", locators, _fill, timeout_ms)
+        self._execute_with_smart_locators(locators, _fill, timeout_ms)
 
-    def smart_get_text(self, locators: list[str], timeout_ms: int = 5000) -> str:
+    def smart_get_text(self, locators: list[str], timeout_ms: int = DEFAULT_TIMEOUT_MS) -> str:
         extracted_texts = []
         def _get_text(element, timeout):
-            element.wait_for(state="visible", timeout=timeout)
+            element.wait_for(state=ElementState.VISIBLE, timeout=timeout)
             extracted_texts.append(element.inner_text())
-        self._execute_with_smart_locators("get_text", locators, _get_text, timeout_ms)
+        self._execute_with_smart_locators(locators, _get_text, timeout_ms)
         return extracted_texts[0] if extracted_texts else ""
+
+    def smart_get_number(self, locators: list[str], timeout_ms: int = DEFAULT_TIMEOUT_MS) -> float:
+        extracted_numbers = []
+        def _get_number(element, timeout):
+            element.wait_for(state=ElementState.VISIBLE, timeout=timeout)
+            value = element.evaluate("el => parseFloat(el.textContent.replace(/[^0-9.]/g, ''))") 
+            extracted_numbers.append(float(value))
+        self._execute_with_smart_locators(locators, _get_number, timeout_ms)
+        return extracted_numbers[0] if extracted_numbers else 0.0
 
     def take_screenshot(self, name: str):
         screenshot_bytes = self.page.screenshot()
         allure.attach(screenshot_bytes, name=name, attachment_type=allure.attachment_type.PNG)
 
     def wait_for_page_load(self):
-        self.page.wait_for_load_state("domcontentloaded")
+        self.page.wait_for_load_state(LoadState.DOM_CONTENT)
 
     def wait_for_network_idle(self):
-        self.page.wait_for_load_state("networkidle")
+        self.page.wait_for_load_state(LoadState.NETWORK_IDLE)
