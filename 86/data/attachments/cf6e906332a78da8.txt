@@ -1,0 +1,64 @@
+2026-05-17 00:17:32,468 - ECommerceFramework - INFO - Launching local Playwright Chromium instance (headless=True)
+2026-05-17 00:17:34,403 - ECommerceFramework - INFO - No credentials provided. Proceeding as Guest checkout.
+2026-05-17 00:17:34,404 - ECommerceFramework - INFO - Attempting '_fill' via locator [1/2]: .gh-search-input__wrap input
+2026-05-17 00:17:34,632 - ECommerceFramework - INFO - Successfully executed '_fill' on locator: .gh-search-input__wrap input
+2026-05-17 00:17:34,633 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: .gh-search-button__wrap button
+2026-05-17 00:17:35,112 - ECommerceFramework - INFO - Successfully executed '_click' on locator: .gh-search-button__wrap button
+2026-05-17 00:17:40,480 - ECommerceFramework - INFO - Price filter input found: .x-textrange__input--to input
+2026-05-17 00:18:12,397 - ECommerceFramework - ERROR - Price filter interaction failed: Timeout 30000ms exceeded.
+2026-05-17 00:18:16,940 - ECommerceFramework - INFO - Found 1 custom listbox variant(s) via '[data-testid='x-msku-evo'] .listbox-button__control'
+2026-05-17 00:18:20,500 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-17 00:18:20,793 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-05-17 00:18:24,228 - ECommerceFramework - INFO - Found 2 custom listbox variant(s) via '[data-testid='x-msku-evo'] .listbox-button__control'
+2026-05-17 00:18:27,170 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-17 00:18:27,446 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-05-17 00:18:31,287 - ECommerceFramework - INFO - Found 1 custom listbox variant(s) via '[data-testid='x-msku-evo'] .listbox-button__control'
+2026-05-17 00:19:03,407 - ECommerceFramework - WARNING - Custom listbox variant selection failed: Locator.scroll_into_view_if_needed: Timeout 29707ms exceeded.
+Call log:
+  - attempting scroll into view action
+    2 × waiting for element to be stable
+      - element is not visible
+    - retrying scroll into view action
+    - waiting 20ms
+    2 × waiting for element to be stable
+      - element is not visible
+    - retrying scroll into view action
+      - waiting 100ms
+    57 × waiting for element to be stable
+       - element is not visible
+     - retrying scroll into view action
+       - waiting 500ms
+
+2026-05-17 00:19:03,407 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-17 00:19:08,470 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: [data-testid='x-atc-action']
+2026-05-17 00:19:08,470 - ECommerceFramework - INFO - Attempting '_click' via locator [2/3]: a[id^='atcBtn_btn']
+2026-05-17 00:19:13,550 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: a[id^='atcBtn_btn']
+2026-05-17 00:19:13,550 - ECommerceFramework - INFO - Attempting '_click' via locator [3/3]: [data-track*='atc']
+2026-05-17 00:19:18,606 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: [data-track*='atc']
+2026-05-17 00:19:18,606 - ECommerceFramework - ERROR - Failed to execute '_click' after trying all locators: ["[data-testid='x-atc-action']", "a[id^='atcBtn_btn']", "[data-track*='atc']"]. Last Error: Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("[data-track*='atc']").first
+    - locator resolved to <a target="_blank" class="EndP FQhq" _sp="p4429486.m152246.l184619" data-click="{"eventFamily":"ADV","eventAction":"ACTN","actionKind":"NAVSRC","operationId":"4429486","flushImmediately":false,"eventProperty":{"encpd":"AQALAAACMEdypgTUG2i/M/Yq+i/1T3fx+mM7E+5ey7aKqIFA4Y5d3n73mPAsfbtF5yEvnUkfFkZZ4OSy9WsEnt7Poz6/TBR/36sFseHf+35neeolssZb9F91yHWWQWNCKIB6QduFw2DStzNWuNh/opikZPO2r0d/XG1p+eUmCjVOIgKuEh7LNMYTJw85r/UH+MOTPmOsm8lVxuoExHFgJ0wDQnoLm2S2VV2KqMIAXasn2jmcV/YJJ1A5mikpQ9C0drQvSlZM6IRJ6YDatc1nWFu896…></a>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - element is outside of the viewport
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - element is outside of the viewport
+    - retrying click action
+      - waiting 100ms
+    10 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - element is outside of the viewport
+     - retrying click action
+       - waiting 500ms
+
