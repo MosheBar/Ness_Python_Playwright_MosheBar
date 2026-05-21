@@ -1,0 +1,17 @@
+2026-05-21 00:23:16,100 - ECommerceFramework - INFO - Launching local Playwright Chromium instance (headless=True)
+2026-05-21 00:23:19,202 - ECommerceFramework - INFO - No credentials provided. Proceeding as Guest checkout.
+2026-05-21 00:23:19,202 - ECommerceFramework - INFO - Attempting '_fill' via locator [1/2]: .gh-search-input__wrap input
+2026-05-21 00:23:19,433 - ECommerceFramework - INFO - Successfully executed '_fill' on locator: .gh-search-input__wrap input
+2026-05-21 00:23:19,434 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: .gh-search-button__wrap button
+2026-05-21 00:23:19,988 - ECommerceFramework - INFO - Successfully executed '_click' on locator: .gh-search-button__wrap button
+2026-05-21 00:23:25,669 - ECommerceFramework - INFO - Price filter input found: .x-textrange__input--to input
+2026-05-21 00:23:58,204 - ECommerceFramework - ERROR - Price filter interaction failed: Timeout 30000ms exceeded.
+2026-05-21 00:24:03,695 - ECommerceFramework - INFO - No variants found — proceeding without selection
+2026-05-21 00:24:03,695 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-21 00:24:04,781 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-05-21 00:24:08,842 - ECommerceFramework - INFO - No variants found — proceeding without selection
+2026-05-21 00:24:08,842 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-21 00:24:09,773 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-05-21 00:24:14,357 - ECommerceFramework - INFO - Found 3 custom listbox variant(s) via '[data-testid='x-msku-evo'] .listbox-button__control'
+2026-05-21 00:24:18,374 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-21 00:24:18,654 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
