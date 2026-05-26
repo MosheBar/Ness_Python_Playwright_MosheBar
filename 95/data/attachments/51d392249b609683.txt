@@ -1,0 +1,52 @@
+2026-05-26 00:20:40,066 - ECommerceFramework - INFO - Launching local Playwright Chromium instance (headless=True)
+2026-05-26 00:20:42,095 - ECommerceFramework - INFO - No credentials provided. Proceeding as Guest checkout.
+2026-05-26 00:20:42,095 - ECommerceFramework - INFO - Attempting '_fill' via locator [1/2]: .gh-search-input__wrap input
+2026-05-26 00:20:42,310 - ECommerceFramework - INFO - Successfully executed '_fill' on locator: .gh-search-input__wrap input
+2026-05-26 00:20:42,311 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: .gh-search-button__wrap button
+2026-05-26 00:20:42,778 - ECommerceFramework - INFO - Successfully executed '_click' on locator: .gh-search-button__wrap button
+2026-05-26 00:20:48,178 - ECommerceFramework - INFO - Price filter input found: .x-textrange__input--to input
+2026-05-26 00:21:20,648 - ECommerceFramework - ERROR - Price filter interaction failed: Timeout 30000ms exceeded.
+2026-05-26 00:21:25,345 - ECommerceFramework - INFO - No variants found — proceeding without selection
+2026-05-26 00:21:25,345 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-26 00:21:26,776 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-05-26 00:21:30,874 - ECommerceFramework - INFO - No variants found — proceeding without selection
+2026-05-26 00:21:30,874 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-26 00:21:31,697 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-05-26 00:21:37,481 - ECommerceFramework - INFO - Found 1 custom listbox variant(s) via '[data-testid='x-msku-evo'] .listbox-button__control'
+2026-05-26 00:22:07,643 - ECommerceFramework - WARNING - Custom listbox variant selection failed: Locator.click: Timeout 30000ms exceeded.
+Call log:
+  - waiting for locator("[data-testid='x-msku-evo'] .listbox-button__control").first
+    - locator resolved to <button type="button" aria-expanded="false" aria-haspopup="listbox" value="10.5 Men/12 Women " aria-controls="nid-vrg-10" class="listbox-button__control btn btn--form btn--truncated">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - element is outside of the viewport
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is visible, enabled and stable
+      - scrolling into view if needed
+      - done scrolling
+      - element is outside of the viewport
+    - retrying click action
+      - waiting 100ms
+    56 × waiting for element to be visible, enabled and stable
+       - element is visible, enabled and stable
+       - scrolling into view if needed
+       - done scrolling
+       - element is outside of the viewport
+     - retrying click action
+       - waiting 500ms
+
+2026-05-26 00:22:07,643 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-05-26 00:22:12,695 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: [data-testid='x-atc-action']
+2026-05-26 00:22:12,695 - ECommerceFramework - INFO - Attempting '_click' via locator [2/3]: a[id^='atcBtn_btn']
+2026-05-26 00:22:17,753 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: a[id^='atcBtn_btn']
+2026-05-26 00:22:17,754 - ECommerceFramework - INFO - Attempting '_click' via locator [3/3]: [data-track*='atc']
+2026-05-26 00:22:22,794 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: [data-track*='atc']
+2026-05-26 00:22:22,794 - ECommerceFramework - ERROR - Failed to execute '_click' after trying all locators: ["[data-testid='x-atc-action']", "a[id^='atcBtn_btn']", "[data-track*='atc']"]. Last Error: Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("[data-track*='atc']").first
+
