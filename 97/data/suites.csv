@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","66290","Test checkout flow for ebay with query 'shoes'","tests","Thu May 28 00:20:48 UTC 2026","broken","Thu May 28 00:21:54 UTC 2026","","test_ecommerce","",""
