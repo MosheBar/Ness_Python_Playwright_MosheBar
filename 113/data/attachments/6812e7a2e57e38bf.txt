@@ -1,0 +1,19 @@
+2026-06-13 00:28:14,118 - ECommerceFramework - INFO - Launching local Playwright Chromium instance (headless=True)
+2026-06-13 00:28:16,791 - ECommerceFramework - INFO - No credentials provided. Proceeding as Guest checkout.
+2026-06-13 00:28:16,792 - ECommerceFramework - INFO - Attempting '_fill' via locator [1/2]: .gh-search-input__wrap input
+2026-06-13 00:28:17,053 - ECommerceFramework - INFO - Successfully executed '_fill' on locator: .gh-search-input__wrap input
+2026-06-13 00:28:17,053 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: .gh-search-button__wrap button
+2026-06-13 00:28:17,670 - ECommerceFramework - INFO - Successfully executed '_click' on locator: .gh-search-button__wrap button
+2026-06-13 00:28:23,651 - ECommerceFramework - INFO - Price filter input found: .x-textrange__input--to input
+2026-06-13 00:28:55,638 - ECommerceFramework - ERROR - Price filter interaction failed: Timeout 30000ms exceeded.
+2026-06-13 00:28:59,120 - ECommerceFramework - INFO - Found 1 custom listbox variant(s) via '[data-testid='x-msku-evo'] .listbox-button__control'
+2026-06-13 00:29:01,409 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-06-13 00:29:01,616 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-06-13 00:29:04,910 - ECommerceFramework - INFO - Found 1 custom listbox variant(s) via '[data-testid='x-msku-evo'] .listbox-button__control'
+2026-06-13 00:29:06,587 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-06-13 00:29:06,830 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-06-13 00:29:10,587 - ECommerceFramework - INFO - No variants found — proceeding without selection
+2026-06-13 00:29:10,588 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-06-13 00:29:11,273 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-06-13 00:29:14,542 - ECommerceFramework - INFO - Attempting '_get_number' via locator [1/4]: [data-test-id='SUBTOTAL']
+2026-06-13 00:29:14,600 - ECommerceFramework - INFO - Successfully executed '_get_number' on locator: [data-test-id='SUBTOTAL']
