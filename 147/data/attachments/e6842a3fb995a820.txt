@@ -1,0 +1,8 @@
+2026-07-17 00:18:27,830 - ECommerceFramework - INFO - Launching local Playwright Chromium instance (headless=True)
+2026-07-17 00:18:30,035 - ECommerceFramework - INFO - No credentials provided. Proceeding as Guest checkout.
+2026-07-17 00:18:30,037 - ECommerceFramework - INFO - Attempting '_fill' via locator [1/2]: .gh-search-input__wrap input
+2026-07-17 00:18:30,248 - ECommerceFramework - INFO - Successfully executed '_fill' on locator: .gh-search-input__wrap input
+2026-07-17 00:18:30,249 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: .gh-search-button__wrap button
+2026-07-17 00:18:30,765 - ECommerceFramework - INFO - Successfully executed '_click' on locator: .gh-search-button__wrap button
+2026-07-17 00:18:36,457 - ECommerceFramework - INFO - Price filter input found: .x-textrange__input--to input
+2026-07-17 00:19:08,167 - ECommerceFramework - ERROR - Price filter interaction failed: Timeout 30000ms exceeded.
