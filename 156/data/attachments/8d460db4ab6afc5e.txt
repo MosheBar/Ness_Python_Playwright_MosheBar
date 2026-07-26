@@ -1,0 +1,22 @@
+2026-07-26 00:20:17,049 - ECommerceFramework - INFO - Launching local Playwright Chromium instance (headless=True)
+2026-07-26 00:20:19,311 - ECommerceFramework - INFO - No credentials provided. Proceeding as Guest checkout.
+2026-07-26 00:20:19,311 - ECommerceFramework - INFO - Attempting '_fill' via locator [1/2]: .gh-search-input__wrap input
+2026-07-26 00:20:19,582 - ECommerceFramework - INFO - Successfully executed '_fill' on locator: .gh-search-input__wrap input
+2026-07-26 00:20:19,582 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: .gh-search-button__wrap button
+2026-07-26 00:20:20,467 - ECommerceFramework - INFO - Successfully executed '_click' on locator: .gh-search-button__wrap button
+2026-07-26 00:20:26,035 - ECommerceFramework - INFO - Price filter input found: .x-textrange__input--to input
+2026-07-26 00:20:58,642 - ECommerceFramework - ERROR - Price filter interaction failed: Timeout 30000ms exceeded.
+2026-07-26 00:21:04,706 - ECommerceFramework - INFO - No variants found — proceeding without selection
+2026-07-26 00:21:04,706 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-07-26 00:21:06,159 - ECommerceFramework - INFO - Successfully executed '_click' on locator: [data-testid='x-atc-action']
+2026-07-26 00:21:11,417 - ECommerceFramework - INFO - No variants found — proceeding without selection
+2026-07-26 00:21:11,418 - ECommerceFramework - INFO - Attempting '_click' via locator [1/3]: [data-testid='x-atc-action']
+2026-07-26 00:21:16,478 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: [data-testid='x-atc-action']
+2026-07-26 00:21:16,479 - ECommerceFramework - INFO - Attempting '_click' via locator [2/3]: a[id^='atcBtn_btn']
+2026-07-26 00:21:21,524 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: a[id^='atcBtn_btn']
+2026-07-26 00:21:21,524 - ECommerceFramework - INFO - Attempting '_click' via locator [3/3]: [data-track*='atc']
+2026-07-26 00:21:26,573 - ECommerceFramework - WARNING - Timeout executing '_click' on locator: [data-track*='atc']
+2026-07-26 00:21:26,573 - ECommerceFramework - ERROR - Failed to execute '_click' after trying all locators: ["[data-testid='x-atc-action']", "a[id^='atcBtn_btn']", "[data-track*='atc']"]. Last Error: Locator.click: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("[data-track*='atc']").first
+
