@@ -1,0 +1,10 @@
+2026-11-17 00:02:22,749 - ECommerceFramework - INFO - Launching local Playwright Chromium instance (headless=True)
+2026-11-17 00:02:23,138 - ECommerceFramework - INFO - No credentials provided. Proceeding as Guest checkout.
+2026-11-17 00:02:23,138 - ECommerceFramework - INFO - Attempting '_fill' via locator [1/2]: .gh-search-input__wrap input
+2026-11-17 00:02:28,145 - ECommerceFramework - WARNING - Timeout executing '_fill' on locator: .gh-search-input__wrap input
+2026-11-17 00:02:28,146 - ECommerceFramework - INFO - Attempting '_fill' via locator [2/2]: #gh-ac
+2026-11-17 00:02:33,149 - ECommerceFramework - WARNING - Timeout executing '_fill' on locator: #gh-ac
+2026-11-17 00:02:33,149 - ECommerceFramework - ERROR - Failed to execute '_fill' after trying all locators: ['.gh-search-input__wrap input', '#gh-ac']. Last Error: Locator.fill: Timeout 5000ms exceeded.
+Call log:
+  - waiting for locator("#gh-ac").first
+
